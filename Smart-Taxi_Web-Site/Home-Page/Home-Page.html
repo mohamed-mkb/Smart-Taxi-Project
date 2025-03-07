@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Taxi Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #030303;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Bordure dorée améliorée avec animation */
+        .gold-border {
+            position: fixed;
+            z-index: 1001;
+            background: linear-gradient(45deg, #d4af37, #ffd700, #d4af37);
+            animation: borderShine 3s linear infinite;
+        }
+
+        @keyframes borderShine {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gold-border.top, .gold-border.bottom {
+            height: 3px;
+            width: 100%;
+            left: 0;
+            background-size: 200% 200%;
+        }
+
+        .gold-border.left, .gold-border.right {
+            width: 3px;
+            height: 100%;
+            top: 0;
+            background-size: 200% 200%;
+        }
+
+        .gold-border.top { top: 0; }
+        .gold-border.bottom { bottom: 0; }
+        .gold-border.left { left: 0; }
+        .gold-border.right { right: 0; }
+
+        /* Hero section améliorée */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+                        url('/api/placeholder/1920/1080');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Effet de particules dorées amélioré */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+            animation: shimmer 8s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.05); }
+            100% { opacity: 0.3; transform: scale(1); }
+        }
+
+        /* Navbar luxueuse */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 30px 60px;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(15px);
+            transition: padding 0.3s ease;
+        }
+
+        .navbar:hover {
+            padding: 35px 60px;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: bold;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            padding: 8px 0;
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Contenu hero amélioré */
+        .hero-content {
+            max-width: 1200px;
+            padding: 0 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            margin-bottom: 40px;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            line-height: 1.3;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.4);
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 50px;
+            line-height: 2;
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+            letter-spacing: 1px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Bouton CTA luxueux */
+        .cta-button {
+            display: inline-block;
+            padding: 25px 60px;
+            background: linear-gradient(45deg, #b4943c, #d4af37, #ffd700);
+            color: #000;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-radius: 2px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+            background-position: right center;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            transition: 0.6s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Section services luxueuse */
+        .services {
+            padding: 150px 60px;
+            background: linear-gradient(to bottom, #030303, #0a0a0a);
+            position: relative;
+        }
+
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+        }
+
+        .services h2 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 100px;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            position: relative;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 50px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: linear-gradient(145deg, #0a0a0a, #030303);
+            padding: 50px 40px;
+            border-radius: 3px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.05), transparent);
+            transform: translateY(-100%);
+            transition: 0.6s;
+        }
+
+        .service-card:hover::before {
+            transform: translateY(100%);
+        }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+
+        .service-card i {
+            font-size: 54px;
+            color: #d4af37;
+            margin-bottom: 30px;
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover i {
+            transform: scale(1.15) rotate(5deg);
+            color: #ffd700;
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 25px;
+            color: #d4af37;
+            letter-spacing: 2px;
+        }
+
+        .service-card p {
+            font-size: 16px;
+            line-height: 1.9;
+            color: #e0e0e0;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="gold-border top"></div>
+    <div class="gold-border bottom"></div>
+    <div class="gold-border left"></div>
+    <div class="gold-border right"></div>
+
+    <nav class="navbar">
+        <div class="logo">ELITE TAXI</div>
+        <div class="nav-links">
+            <a href="./Home-Page.html">Accueil</a>
+            <a href="../Details-Page/Details-Page.html">Services</a>
+            <a href="../Login-Page/connexion.html">Contact</a>
+            <a href="../Sign-Page/SignIn-Page.html">Réserver</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>L'Excellence du Transport<br>Premium</h1>
+            <p>Découvrez une expérience de transport d'exception où le raffinement se marie à la perfection. Notre flotte de véhicules d'exception et nos chauffeurs d'élite vous garantissent un voyage inoubliable, empreint d'élégance et de distinction.</p>
+            <a href="#reservation" class="cta-button">Réserver votre expérience</a>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <h2>Services Exclusifs</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <i class="fas fa-car-side"></i>
+                <h3>Transport VIP</h3>
+                <p>Une flotte de véhicules prestigieux minutieusement sélectionnés, dotés des dernières innovations technologiques pour vous garantir une expérience de voyage d'exception.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-plane"></i>
+                <h3>Service Aéroport</h3>
+                <p>Un accueil personnalisé et un service de conciergerie premium pour vos transferts aéroportuaires, dans une atmosphère de luxe et de sérénité absolue.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-glass-cheers"></i>
+                <h3>Événements Prestige</h3>
+                <p>Une prestation sur mesure pour vos événements les plus exclusifs, avec un service d'exception minutieusement orchestré selon vos exigences les plus raffinées.</p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
